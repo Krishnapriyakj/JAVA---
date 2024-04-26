@@ -1,0 +1,94 @@
+import java.util.Scanner;
+
+public class StringOperations {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        int choice;
+
+        do {
+            System.out.println("Menu:");
+            System.out.println("1. Find length of a string");
+            System.out.println("2. Reverse a string");
+            System.out.println("3. Compare two strings");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter a string: ");
+                    input = scanner.nextLine();
+                    int length = findLength(input);
+                    System.out.println("Length of the string: " + length);
+                    break;
+                case 2:
+                    System.out.print("Enter a string: ");
+                    input = scanner.nextLine();
+                    String reversed = reverseString(input);
+                    System.out.println("Reversed string: " + reversed);
+                    break;
+                case 3:
+                    System.out.print("Enter the first string: ");
+                    String str1 = scanner.nextLine();
+                    System.out.print("Enter the second string: ");
+                    String str2 = scanner.nextLine();
+                    boolean isEqual = compareStrings(str1, str2);
+                    if (isEqual) {
+                        System.out.println("The strings are equal.");
+                    } else {
+                        System.out.println("The strings are not equal.");
+                    }
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+            }
+        } while (choice != 4);
+
+        scanner.close();
+    }
+
+    public static int findLength(String str) {
+        int length = 0;
+        // Iterate through each character of the string
+        for (char ch : str.toCharArray()) {
+            length++;
+        }
+        return length;
+    }
+
+    public static String reverseString(String str) {
+        char[] chars = str.toCharArray();
+        int left = 0;
+        int right = chars.length - 1;
+        while (left < right) {
+            // Swap characters
+            char temp = chars[left];
+            chars[left] = chars[right];
+            chars[right] = temp;
+            // Move pointers
+            left++;
+            right--;
+        }
+        return new String(chars);
+    }
+
+    public static boolean compareStrings(String str1, String str2) {
+        // Check if the lengths of the strings are different
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+        // Compare each character of the strings
+        for (int i = 0; i < str1.length(); i++) {
+            if (str1.charAt(i) != str2.charAt(i)) {
+                return false;
+            }
+        }
+        // If all characters match, return true
+        return true;
+    }
+}

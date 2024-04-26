@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class StringArraySort {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Input the size of the array
+        System.out.print("Enter the size of the array: ");
+        int size = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        
+        // Input the strings into the array
+        String[] arr = new String[size];
+        for (int i = 0; i < size; i++) {
+            System.out.print("Enter string " + (i + 1) + ": ");
+            arr[i] = scanner.nextLine();
+        }
+        
+        // Sort the array
+        sortStringArray(arr);
+        
+        // Print the sorted array
+        System.out.println("Sorted array:");
+        for (String str : arr) {
+            System.out.println(str);
+        }
+        
+        scanner.close();
+    }
+    
+    public static void sortStringArray(String[] arr) {
+        // Bubble sort algorithm
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                // Compare adjacent strings and swap if necessary
+                if (arr[j].compareTo(arr[j + 1]) > 0) {
+                    String temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+}
